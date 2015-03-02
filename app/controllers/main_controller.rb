@@ -1,5 +1,5 @@
 class MainController < ApplicationController
   def index
-    @name = "Matt"
+    @links = Link.all
   end
 end
