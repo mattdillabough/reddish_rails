@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'main#index'
-
+  resources :users, :path_names => {new: 'register'}
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
