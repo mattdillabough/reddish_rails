@@ -128,4 +128,6 @@ body {
   margin: 6px;
 }
 
-
+.field_with_errors {
+  display: inline;
+}
