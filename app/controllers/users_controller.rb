@@ -12,6 +12,12 @@ class UsersController < ApplicationController
     end
   end
   
+  def login
+    if request.post?
+      # Log the user in
+    end
+  end
+  
   private
 
   def user_params
