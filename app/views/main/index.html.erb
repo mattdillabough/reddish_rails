@@ -27,7 +27,7 @@
     <%# if @username %>
       <a href="/user/<%= @username %>"><%#= @username %></a> |
     <%# else %>
-          <a href="/login">login</a> | <%= link_to 'register', new_user_path %> |
+          <%= link_to 'login', new_user_path %> | <%= link_to 'register', new_user_path %> |
     <%# end %>
     <a href="">preference</a> | <a href="/logout">logout</a>
   </div>
