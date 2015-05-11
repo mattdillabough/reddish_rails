@@ -1,7 +1,16 @@
 <h2>Login</h2>
 
+<% if @error %>
+  <div id="error_explanation">
+    <ul>
+      <li> <%= @error %> </li>
+    </ul>
+  </div>
+<% end %>
+
+
 <%= form_tag action: 'login' do %>
-  Username:<br/> <%= text_field_tag 'username' %><br/>
-  Password:<br/> <%= password_field_tag 'password' %><br/>
+  Username:<br/> <%= text_field_tag 'user[username]' %><br/>
+  Password:<br/> <%= password_field_tag 'user[password]' %><br/>
   <%= submit_tag 'Login' %>
 <% end %>
