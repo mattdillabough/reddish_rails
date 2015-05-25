@@ -24,11 +24,12 @@
     </ul>
   </div>
   <div id="user-bar">
-    <%# if @username %>
-      <a href="/user/<%= @username %>"><%#= @username %></a> |
-    <%# else %>
-          <%= link_to 'login', {controller: :users, action: :login} %> | <%= link_to 'register', new_user_path %> |
-    <%# end %>
+    <% if @current_user %>
+      <a href="/user/<%= @current_user.username %>"><%= @current_user.username %></a> |
+    <% else %>
+      <%= link_to 'login', {controller: :users, action: :login} %> | 
+      <%= link_to 'register', new_user_path %> |
+    <% end %>
     <a href="">preference</a> | <a href="/logout">logout</a>
   </div>
 </div>
