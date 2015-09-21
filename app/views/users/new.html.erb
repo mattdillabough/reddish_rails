@@ -1,20 +1,51 @@
-<h2>Register</h2>
-
 <% if @user.errors.any? %>
-  <div id="error_explanation">
-    <h3>There were <%= pluralize(@user.errors.count, "problem") %> with your registration:</h3>
-    <ul>
-    <% @user.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
+  <div class="container">
+    <dl class="col-md-12">
+      <dt>There were <%= pluralize(@user.errors.count, "problem") %> with your registration:</dt>
+      <% @user.errors.full_messages.each do |msg| %>
+        <dd><%= msg %></dd>
+      <% end %>
+    </dl>
   </div>
 <% end %>
 
-<%= form_for @user, url: {action: "create"} do |f| %>
-  Email:<br> <%= f.text_field(:email) %> <br>
-  Username:<br> <%= f.text_field(:username) %> <br>
-  Password:<br> <%= f.password_field(:password) %> <br>
-  Confirm Password:<br> <%= f.password_field(:password_confirmation) %> <br>
-  <br><%= f.submit "Register" %>
+<div class="container">
+  <%= form_for @user, url: {action: "create"} do |f| %>
+  <div class="row">
+    <h2 class="col-md-12">Register</h2>
+  </div>
+  
+  <div class="row">
+    <div class="form-group col-xs-6 col-md-4">
+      <label for="link_url">Email:</label>
+      <%= f.text_field :email, class: "form-control"%>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="form-group col-xs-6 col-md-4">
+      <label for="link_url">Username:</label>
+      <%= f.text_field :username, class: "form-control"%>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="form-group col-xs-6 col-md-4">
+      <label for="link_url">Password:</label>
+      <%= f.password_field :password, class: "form-control"%>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="form-group col-xs-6 col-md-4">
+      <label for="link_url">Confirm Password:</label>
+      <%= f.password_field :url, class: "form-control"%>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-6 col-md-4">
+      <%= f.submit 'Register', class: "form-control" %>
+    </div>
+  </div>
 <% end %>

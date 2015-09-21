@@ -5,7 +5,6 @@ body {
   background-color: #FFFFFF;
   font-family: verdana, arial, helvetica, sans-serif;
   margin: 0px;
-  min-width: 1000px;
 }
 
 #header {
@@ -133,4 +132,8 @@ body {
 
 .field_with_errors {
   display: inline;
+}
+
+.register {
+  padding: 8px; 
 }
