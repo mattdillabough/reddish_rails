@@ -7,9 +7,10 @@ class LinksController < ApplicationController
   
   def create
     # The 'create' method is essentially 'new and save if valid'
-    @link = Link.create(link_params)
+    @link = Link.new(link_params)
+    @link.user = get_current_user
+    @link.save
     if @link.valid?
-      @link.user = get_current_user
       redirect_to root_path
     else
       render "new"
@@ -27,6 +28,6 @@ class LinksController < ApplicationController
   
   def link_params
     # {link: {url: 'http://foo.fake', title: 'Foo', 'dynamite': 'boom'}}
-    params.require(:link).permit(:url, :title, :description) # 4
+    params.require(:link).permit(:url, :title, :description)
   end
 end

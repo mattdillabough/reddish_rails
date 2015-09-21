@@ -9,7 +9,8 @@ Rails.application.routes.draw do
 
   get 'login', to: 'users#login'
   post 'login', to: 'users#login'
-  
+  get 'logout', to: 'users#logout'  
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
