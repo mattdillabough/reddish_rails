@@ -17,6 +17,9 @@ class UsersController < ApplicationController
   end
   
   def login
+    if flash[:msg]
+      @error = flash[:msg]
+    end
     if request.post?
       # Log the user in
       user = User.find_by(email: user_params[:username])

@@ -1,12 +1,12 @@
-<% if @error %>
-  <div class="container">
-    <ul class="col-md-12">
-      <li> <%= @error %> </li>
-    </ul>
-  </div>
-<% end %>
-
 <div class="container">
+  <% if @error %>
+    <div class="row error-message-cont">
+      <div class="error-message bg-danger text-center col-xs-6 col-md-4 col-xs-offset-3 col-md-offset-4">
+        <%= @error %>
+      </div>
+    </div>
+  <% end %>
+  
   <%= form_tag action: 'login' do %>
   <div class="row text-center">
     <h2 class="col-md-12">Login</h2>
