@@ -64,15 +64,6 @@ body {
   padding: 5px 15px 10px 15px;
 }
 
-#panels {
-  position: relative;
-}
-
-#center-panel {
-  margin-right: 330px;
-  min-height: 1000px;
-}
-
 .link-number {
   width: 26px;
   float: left;
@@ -109,25 +100,6 @@ body {
 .details {
   font-size: 13px;
   color: #A3A3A3;
-}
-
-#right-panel {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 320px;
-}
-
-#submit-post {
-  width: 300px;
-  height: 84px;
-  font-family: arial, verdana, helvetica, sans-serif;
-}
-
-.post-button {
-  width: 300px;
-  height: 30px;
-  margin: 6px;
 }
 
 .field_with_errors {

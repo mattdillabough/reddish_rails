@@ -9,7 +9,10 @@ Rails.application.routes.draw do
 
   get 'login', to: 'users#login'
   post 'login', to: 'users#login'
-  get 'logout', to: 'users#logout'  
+  get 'logout', to: 'users#logout'
+  get 'categories/:name/:id', to: 'main#show_category', as: 'show_category'
+  get 'admin', to: 'categories#new'
+  post 'admin', to: 'categories#create'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
