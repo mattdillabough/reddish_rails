@@ -1,0 +1,17 @@
+<div class="link">
+  <div class="link-number"><%= link_counter + 1 %></div>
+  <div class="link-votes">
+    <div class="link-upvote" data-link-id="<%= link.id %>">△</div>
+    <div class="link-downvote">▽</div>
+  </div>
+  <div class="link-info">
+    <div><a class="link-title" href="<%= link.url %>"><%= link.title %></a></div>
+    <div class="details">Submitted <%= time_ago_in_words(link.created_at) %> ago by
+      <a class="link-title" href="/user/<%= link.user.username %>"><%= link.user.username %></a>
+      to  <a class="link-title"
+             href="/categories/<%= link.category.name%>/<%= link["category_id"] %>">
+           <%= link.category.name %>
+          </a>
+    </div>
+  </div>
+</div>

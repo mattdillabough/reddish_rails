@@ -3,18 +3,18 @@
     <div id="title" class="col-md-2">
       Reddish
     </div>
-    <div id="topics" class="col-md-7">
-      <ul>
-        <li><a href="/">All</a></li>
+    <div id="categories" class="col-md-7">
+      <div class="list">
+        <span class="list-item"><a href="/">All</a></span>
         <% @categories.each do |category| %>
           <% if params[:id] == category.id.to_s %>
             <% category_class = 'selected' %>
           <% end %>
-          <li>
+          <span class="list-item">
             <%= link_to category.name, controller: 'main', action: 'show_category', name: category.name, id: category.id %>
-          </li>
+          </span>
         <% end %>
-      </ul>
+      </div>
     </div>
     <div id="user-bar" class="col-md-3">
       <% if @current_user %>
@@ -28,12 +28,14 @@
   </div>
   
   <div class="row">
-    <div class="col-md-4 col-md-offset-4">
+    <div class="submit-link-btn-cont col-md-4 col-md-offset-4">
       <form method="get" action="/links/new">
         <button class="post-button form-control" type="submit">Submit a new link</button>
       </form>
     </div>
-
+  </div>
+  
+  <div class="row">
     <div class="col-md-8">
       <div class="links">
         <% if @links.size > 0 %>

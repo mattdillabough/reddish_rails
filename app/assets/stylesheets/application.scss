@@ -3,65 +3,73 @@
 
 body {
   background-color: #FFFFFF;
-  font-family: verdana, arial, helvetica, sans-serif;
-  margin: 0px;
 }
 
 #header {
-  width: 100%;
-  height: 41.5px;
-  margin: 0px;
   border-bottom: 1px solid #5F99CF;
   background-color: #CEE3F6;
 }
 
-#title {
-  padding-left: 25px;
-  font-size: 35px;
-  float: left;
+@media (min-width: 1200px) {
+  #header {
+    height: 51px;
+  }
+  
+  #categories {
+    padding-top: 31px;
+  }
+  
+  #categories .list-item a {
+    border-bottom: 1px solid #eff7ff;
+  }
+  
+  #user-bar {
+    margin-top: 15px;
+  }
 }
 
-#topics ul {
-  float: left;
-  padding-top: 23px;
-  margin: 0px;
+#title {
+  font-size: 35px;
+}
+
+#categories {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+#categories .list {
   list-style-type: none;
 }
 
-#topics ul li {
-  display: inline;
+#categories .list-item {
   margin-left: 7px;
+  display: inline;
 }
 
-#topics ul li a {
+#categories .list-item a {
   font-size: 12px;
   background-color: #eff7ff;
-  border-bottom: 1px solid #5F99CF;
   color: #369;
   font-weight: bold;
-  padding: 0px 5px;
+  padding: 0 5px;
   text-decoration: none;
 }
 
-#topics ul li a.selected {
+#categories ul li a.selected {
   border: 1px solid #5F99CF;
   border-bottom: 1px solid #FFF;
   background-color: #FFF;
 }
 
 #user-bar {
-  float: right;
   font-size: 14px;
   color: #369;
-  margin-top:16px;
-  height: 8px;
-  background-color: #EFF5FB;
-  border-right: 1px solid #CEE3F6;
-  border-left: 1px solid #CEE3F6;
-  border-top: 1px solid #CEE3F6;
-  border-top-right-radius: 8px;
-  border-top-left-radius: 8px;
-  padding: 5px 15px 10px 15px;
+  text-align: right;
+}
+
+.submit-link-btn-cont {
+  margin-top: 10px;
 }
 
 .link-number {

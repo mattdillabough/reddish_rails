@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <h2 class="col-md-12">Admin - Categories</h2>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row"
+    <ol>
+    <% @categories.each do |category| %>
+      <li><%= category.name %></li>
+    <% end %>
+  <%= link_to 'Create new category here.', new_admin_category_path %>
+    </ol>
+  </div>
+</div>
