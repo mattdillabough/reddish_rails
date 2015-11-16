@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'main#index'
+  root 'categories#show'
   resources :users, :path_names => {new: 'register'}
   resources :links
   get 'admin', to: 'admin#index'
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get 'login', to: 'users#login'
   post 'login', to: 'users#login'
   get 'logout', to: 'users#logout'
-  get 'categories/:name/:id', to: 'main#show_category', as: 'show_category'
+  get 'categories/:name/:id', to: 'categories#show'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
