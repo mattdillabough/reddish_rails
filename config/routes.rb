@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
   # You can have the root of your site routed with "root"
   root 'categories#show'
   resources :users, :path_names => {new: 'register'}
-  resources :links
+  resources :links do
+    member do 
+      get :upvote
+    end
+  end
   get 'admin', to: 'admin#index'
   namespace :admin do
     resources :categories

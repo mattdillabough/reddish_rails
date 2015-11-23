@@ -17,6 +17,13 @@ class LinksController < ApplicationController
     end
   end
   
+  def upvote
+    link = Link.find(params[:id])
+    link.upvotes += 1
+    link.save
+    redirect_to root_path
+  end
+  
   private
   
   def redirect_if_not_logged_in
