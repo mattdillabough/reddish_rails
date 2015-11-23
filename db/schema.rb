@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151116045202) do
+ActiveRecord::Schema.define(version: 20151123050322) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name", limit: 255
@@ -23,10 +23,8 @@ ActiveRecord::Schema.define(version: 20151116045202) do
     t.string   "url",         limit: 255
     t.integer  "category_id", limit: 4
     t.integer  "user_id",     limit: 4
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.integer  "upvotes",     limit: 4,   default: 0
-    t.integer  "downvotes",   limit: 4,   default: 0
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -40,5 +38,17 @@ ActiveRecord::Schema.define(version: 20151116045202) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
+
+  create_table "votes", id: false, force: :cascade do |t|
+    t.integer  "link_id",    limit: 4, null: false
+    t.integer  "user_id",    limit: 4, null: false
+    t.boolean  "upvote",     limit: 1
+    t.boolean  "downvote",   limit: 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["link_id"], name: "index_votes_on_link_id", using: :btree
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
 
 end

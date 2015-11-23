@@ -5,8 +5,12 @@ $(function() {
     var link_id = div.data('link-id');
     var url = '/links/' + link_id + '/upvote';
     $.ajax(url, {
-      success: function() {
-        div.text('▲');
+      success: function(data) {
+        if (data.show_login) {
+          alert("You need to login to do that!");
+        } else {
+          div.text('▲'); 
+        }
       }
     });
   })

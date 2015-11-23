@@ -18,10 +18,13 @@ class LinksController < ApplicationController
   end
   
   def upvote
-    link = Link.find(params[:id])
-    link.upvotes += 1
-    link.save
-    redirect_to root_path
+    user = get_current_user
+    if user
+      link = Link.find(params[:id])
+      render json: {success: link.upvote(user)}
+    else
+      render json: {show_login: true}
+    end
   end
   
   private

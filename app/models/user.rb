@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  has_many :votes
+  has_many :links, through: :votes 
+  
   RE_USERNAME = /\A[A-Za-z0-9_.]+\z/
   RE_EMAIL = /\A[A-Za-z0-9_.]+@[A-Za-z0-9_.]+\z/
   
