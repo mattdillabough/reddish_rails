@@ -6,6 +6,7 @@ class Link < ActiveRecord::Base
 
   # The links table in the database has a user_id column which records
   # the id of the user who "owns"/created the link.
+  # belongs_to :owner, class_name: 'User', foreign_key: "user_id"
   belongs_to :user
   belongs_to :category
   
@@ -19,5 +20,11 @@ class Link < ActiveRecord::Base
     else
       return false
     end
+  end
+  
+  def downvote(user)
+    existing = self.users.find(user.id)
+    self.users.destroy(user) if !existing.nil?
+    return self.votes.create(user_id: user.id, upvote: false, downvote: true) != nil
   end
 end

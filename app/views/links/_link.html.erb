@@ -2,7 +2,7 @@
   <div class="link-number"><%= link_counter + 1 %></div>
   <div class="link-votes">
     <div class="link-upvote" data-link-id="<%= link.id %>">△</div>
-    <div class="link-downvote">▽</div>
+    <div class="link-downvote" data-link-id="<%= link.id %>">▽</div> 
   </div>
   <div class="link-info">
     <div><a class="link-title" href="<%= link.url %>"><%= link.title %></a></div>

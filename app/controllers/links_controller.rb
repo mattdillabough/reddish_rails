@@ -27,6 +27,16 @@ class LinksController < ApplicationController
     end
   end
   
+  def downvote
+    user = get_current_user
+    if user
+      link = Link.find(params[:id])
+      render json: {success: link.downvote(user)}
+    else
+      render json: {show_login: true}
+    end
+  end
+  
   private
   
   def redirect_if_not_logged_in

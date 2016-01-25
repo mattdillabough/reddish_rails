@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :links do
     member do 
       get :upvote
+      get :downvote
     end
   end
   get 'admin', to: 'admin#index'
