@@ -14,17 +14,23 @@ class Link < ActiveRecord::Base
   validates :title, presence: true
   
   def upvote(user)
-    existing = self.votes.where(user_id: user.id)
-    if existing.size == 0
-      return self.votes.create(user_id: user.id, upvote: true, downvote: false) != nil
-    else
-      return false
-    end
+    generic_vote(:upvote)
   end
   
   def downvote(user)
-    existing = self.users.find(user.id)
+    generic_vote(:downvote)
+  end
+  
+  private
+  
+  # :upvote or :downvote
+  def generic_vote(direction)
+    existing = self.votes.find_by_user_id(user.id)
     self.users.destroy(user) if !existing.nil?
-    return self.votes.create(user_id: user.id, upvote: false, downvote: true) != nil
+    if existing.nil? || !existing.send(direction)
+      vote = self.votes.create(
+        user_id: user.id, upvote: direction == :upvote, downvote: direction == :downvote)
+      return vote != nil
+    end     
   end
 end
