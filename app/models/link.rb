@@ -12,19 +12,33 @@ class Link < ActiveRecord::Base
   
   validates :url, presence: true, format: {with: RE_URL, message: "must start with http(s)://"}
   validates :title, presence: true
-  
+    
   def upvote(user)
-    generic_vote(:upvote)
+    generic_vote(:upvote, user)
   end
   
   def downvote(user)
-    generic_vote(:downvote)
+    generic_vote(:downvote, user)
+  end
+  
+  def upvoted_by?(user)
+    generic_voted_by?(:upvote, user)
+  end
+  
+  def downvoted_by?(user)
+    generic_voted_by?(:downvote, user)
   end
   
   private
   
+  def generic_voted_by?(direction, user)
+    return nil if !user
+    vote = self.votes.find_by_user_id(user.id)
+    return !vote.nil? && vote.send(direction)
+  end
+  
   # :upvote or :downvote
-  def generic_vote(direction)
+  def generic_vote(direction, user)
     existing = self.votes.find_by_user_id(user.id)
     self.users.destroy(user) if !existing.nil?
     if existing.nil? || !existing.send(direction)
