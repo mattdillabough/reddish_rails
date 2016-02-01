@@ -29,6 +29,10 @@ class Link < ActiveRecord::Base
     generic_voted_by?(:downvote, user)
   end
   
+  def score
+    self.votes.where(upvote: true).count - self.votes.where(upvote: false).count
+  end
+    
   private
   
   def generic_voted_by?(direction, user)

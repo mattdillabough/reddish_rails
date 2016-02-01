@@ -21,7 +21,10 @@ class LinksController < ApplicationController
     user = get_current_user
     if user
       link = Link.find(params[:id])
-      render json: {success: link.upvote(user)}
+      render json: {
+        success: link.upvote(user),
+        score: link.score
+      }
     else
       render json: {show_login: true}
     end
@@ -31,7 +34,10 @@ class LinksController < ApplicationController
     user = get_current_user
     if user
       link = Link.find(params[:id])
-      render json: {success: link.downvote(user)}
+      render json: {
+        success: link.downvote(user),
+        score: link.score
+      }
     else
       render json: {show_login: true}
     end
