@@ -9,7 +9,8 @@ $(function() {
     $.ajax(url, {
       success: function(data) {
         if (data.show_login) {
-          alert("You need to login to do that!");
+          var inst = $('[data-remodal-id=login-modal]').remodal();
+          inst.open();
         } else {
           score.text(data.score);
           if (div.text() === '▲') {
@@ -18,7 +19,6 @@ $(function() {
             div.text('▲')
           }
           div1.text('▽');
-          
         }
       }
     });
@@ -33,7 +33,8 @@ $(function() {
     $.ajax(url, {
       success: function(data) {
         if (data.show_login) {
-          alert("You need to login to do that!");
+          var inst = $('[data-remodal-id=login-modal]').remodal();
+          inst.open();
         } else {
           score.text(data.score);
           if (div.text() === '▼') {

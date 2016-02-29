@@ -1,0 +1,41 @@
+
+  <% if @error %>
+    <div class="row error-message-cont">
+      <div class="error-message bg-danger text-center col-xs-6 col-md-4 col-xs-offset-3 col-md-offset-4">
+        <%= @error %>
+      </div>
+    </div>
+  <% end %>
+  
+  <%= form_tag action: 'login', controller: :users do %>
+  <div class="row text-center">
+    <h2 class="col-md-12">Login</h2>
+  </div>
+  
+  <div class="row">
+    <div class="form-group col-xs-6 col-md-4 col-xs-offset-3 col-md-offset-4">
+      <label for="user_username">Username or Email:</label>
+      <%= text_field_tag 'user[username]', nil, class: "form-control" %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="form-group col-xs-6 col-md-4 col-xs-offset-3 col-md-offset-4">
+      <label for="user_password">Password:</label>
+      <%= password_field_tag 'user[password]', nil, class: "form-control" %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-6 col-md-4 col-xs-offset-3 col-md-offset-4">
+        <%= submit_tag 'Login', class: "form-control" %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class = "col-md-12 text-center register">
+      Don't have an account? <%= link_to 'Register here.', new_user_path %>
+    </div>
+  </div>
+  <% end %>
+ 
