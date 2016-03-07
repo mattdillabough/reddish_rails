@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params)
     if @user.valid?
+      UserMailer.welcome_email(@user).deliver_later
       session[:user_id] = @user.id
       redirect_to root_path
     else
