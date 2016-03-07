@@ -1,50 +1,43 @@
 $(function() {
-  // For every div that is an upvote button
-  $('.link-upvote').click(function() {
+  $('.link-upvote, .link-downvote').click(function(){
     var div = $(this);
     var link_id = div.data('link-id');
-    var div1 = $(".link-downvote[data-link-id=" + link_id + "]");
-    var score = $(".link-score[data-link-id=" + link_id + "]")
-    var url = '/links/' + link_id + '/upvote';
-    $.ajax(url, {
-      success: function(data) {
-        if (data.show_login) {
-          var inst = $('[data-remodal-id=login-modal]').remodal();
+    var url, selector;
+    if (div.hasClass('link-downvote')) {
+      // We are making a downvote.
+      var selector = '.link-upvote';
+      var url = '/links/' + link_id + '/downvote';
+      var shaded = '▼';
+      var open = '▽';
+      var opp_open = '△';
+    } else {
+      // We are making an upvote.
+      var selector = '.link-downvote'
+      var url = '/links/' + link_id + '/upvote'; 
+      var shaded = '▲';
+      var open = '△';
+      var opp_open = '▽';
+    }   
+    var other_div = $(selector + "[data-link-id=" + link_id + "]"); 
+    var score = $(".link-score[data-link-id=" + link_id + "]");
+
+    var onSuccess = function(data) {
+      if (data.show_login) {
+        var inst = $('[data-remodal-id=login-modal]').remodal();
           inst.open();
+      } else {
+        score.text(data.score);
+        if (div.text() === shaded) {
+          div.text(open)
         } else {
-          score.text(data.score);
-          if (div.text() === '▲') {
-            div.text('△')
-          } else {
-            div.text('▲')
-          }
-          div1.text('▽');
+          div.text(shaded)
         }
+        other_div.text(opp_open);
       }
-    });
-  })
-  
-  $('.link-downvote').click(function() {
-    var div = $(this);
-    var link_id = div.data('link-id');
-    var div1 = $(".link-upvote[data-link-id=" + link_id + "]");
-    var score = $(".link-score[data-link-id=" + link_id + "]")
-    var url = '/links/' + link_id + '/downvote';
+    };
+    
     $.ajax(url, {
-      success: function(data) {
-        if (data.show_login) {
-          var inst = $('[data-remodal-id=login-modal]').remodal();
-          inst.open();
-        } else {
-          score.text(data.score);
-          if (div.text() === '▼') {
-            div.text('▽')
-          } else {
-            div.text('▼')
-          } 
-          div1.text('△');
-        }
-      }
+      success: onSuccess
     });
   })
 });
