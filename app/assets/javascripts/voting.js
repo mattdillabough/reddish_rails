@@ -1,5 +1,6 @@
-$(function() {
+$(document).on('page:change', function() {
   $('.link-upvote, .link-downvote').click(function(){
+    console.log('click happened');
     var div = $(this);
     var link_id = div.data('link-id');
     var url, selector;
@@ -22,9 +23,10 @@ $(function() {
     var score = $(".link-score[data-link-id=" + link_id + "]");
 
     var onSuccess = function(data) {
+      console.log('onSuccess called');
       if (data.show_login) {
         var inst = $('[data-remodal-id=login-modal]').remodal();
-          inst.open();
+        inst.open();
       } else {
         score.text(data.score);
         if (div.text() === shaded) {
@@ -39,5 +41,5 @@ $(function() {
     $.ajax(url, {
       success: onSuccess
     });
-  })
+  });
 });
