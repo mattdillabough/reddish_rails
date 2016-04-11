@@ -5,6 +5,9 @@ class CategoriesController < ApplicationController
     @links = Link.where(category_id: params[:id])
     if @links.empty?
       @links = Link.all
+      session.delete(:category_id)
+    else
+      session[:category_id] = params[:id]
     end
     @categories = Category.all
   end 

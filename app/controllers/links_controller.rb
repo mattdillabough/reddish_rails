@@ -26,6 +26,8 @@ class LinksController < ApplicationController
         score: link.score
       }
     else
+      session[:user_action] = "upvote"
+      session[:link_id] = params[:id]
       render json: {show_login: true}
     end
   end
@@ -39,6 +41,8 @@ class LinksController < ApplicationController
         score: link.score
       }
     else
+      session[:user_action] = "downvote"
+      session[:link_id] = params[:id]
       render json: {show_login: true}
     end
   end

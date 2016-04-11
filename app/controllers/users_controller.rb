@@ -35,7 +35,13 @@ class UsersController < ApplicationController
         return
       end
       session[:user_id] = user.id
-      redirect_to :root
+      delayed_action(user)
+      if session[:category_id]
+        redirect_to category_path(session[:category_id])
+        session.delete(:category_id)
+     else
+        redirect_to :root
+     end
     end
     # Show the login page
   end
@@ -46,6 +52,19 @@ class UsersController < ApplicationController
   end
   
   private
+  
+  def delayed_action(user)
+    if session[:user_action]
+      link = Link.find(session[:link_id])
+      if session[:user_action] == 'upvote'
+        link.upvote(user)
+      elsif session[:user_action] == 'downvote'
+        link.downvote(user)
+      end
+      session.delete(:user_action)
+      session.delete(:link_id)
+    end
+  end
 
   def user_params
     params.require(:user).permit(:username, :email, :password, :password_confirmation)
