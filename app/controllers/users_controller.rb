@@ -23,10 +23,8 @@ class UsersController < ApplicationController
     end
     if request.post?
       # Log the user in
-      user = User.find_by(email: user_params[:username])
-      if !user
-        user = User.find_by(username: user_params[:username])
-      end
+      # Form accepts email in username field.
+      user = User.find_by_email_or_username(user_params[:username])
       user = user.try(:authenticate, user_params[:password])
       if !user
         @error = 'No user with that username or password found!'
@@ -39,16 +37,54 @@ class UsersController < ApplicationController
       if session[:category_id]
         redirect_to category_path(session[:category_id])
         session.delete(:category_id)
-     else
+      else
         redirect_to :root
-     end
+      end
     end
-    # Show the login page
   end
   
   def logout
     session.delete(:user_id)
     redirect_to :root
+  end
+  
+  def request_reset
+    # Empty controller action, no logic necessary.
+  end
+
+  def send_reset_email
+    # Form accepts email in username field.
+    @user = User.find_by_email_or_username(user_params[:username])
+    @user.reset_token = ResetToken.generate()
+    @user.save!
+    UserMailer.reset_email(@user).deliver_later
+    flash[:msg] = "If that user exists, a reset email has been sent."
+    redirect_to request_reset_users_path
+  end
+  
+  def begin_reset_password
+    @reset_token_value = params[:reset_token]
+    if @reset_token_value
+      reset_token = ResetToken.find_by_value(@reset_token_value)
+      if reset_token && reset_token.is_valid?
+        @user = reset_token.user
+      end
+    end
+  end
+  
+  def reset_password
+    @reset_token_value = params[:user][:reset_token]
+    reset_token = ResetToken.find_by_value(@reset_token_value)
+    if reset_token.is_valid?
+      @user = reset_token.user
+      @user.password = params[:user][:password]
+      @user.password_confirmation = params[:user][:password_confirmation]
+      if @user.save
+        redirect_to login_path
+      else
+        render :begin_reset_password
+      end
+    end
   end
   
   private

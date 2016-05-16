@@ -3,7 +3,14 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   # You can have the root of your site routed with "root"
   root 'categories#show'
-  resources :users, :path_names => {new: 'register'}
+  resources :users, :path_names => {new: 'register'} do
+    collection do
+      get :request_reset
+      post :send_reset_email
+      get :begin_reset_password
+      post :reset_password
+    end
+  end
   resources :links do
     member do 
       get :upvote

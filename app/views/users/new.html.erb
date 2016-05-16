@@ -1,13 +1,4 @@
-<% if @user.errors.any? %>
-  <div class="container">
-    <dl class="col-md-12">
-      <dt>There were <%= pluralize(@user.errors.count, "problem") %> with your registration:</dt>
-      <% @user.errors.full_messages.each do |msg| %>
-        <dd><%= msg %></dd>
-      <% end %>
-    </dl>
-  </div>
-<% end %>
+<%= render partial: 'error' %>
 
 <div class="container">
   <%= form_for @user, url: {action: "create"} do |f| %>
@@ -39,7 +30,7 @@
   <div class="row">
     <div class="form-group col-xs-6 col-md-4">
       <label for="link_url">Confirm Password:</label>
-      <%= f.password_field :url, class: "form-control"%>
+      <%= f.password_field :password_confirmation, class: "form-control"%>
     </div>
   </div>
   

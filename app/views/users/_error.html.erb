@@ -1,0 +1,9 @@
+<% if @user && @user.errors.any? %>
+  <div class="container">
+    <dl class="col-md-12">
+      <dt>There were <%= pluralize(@user.errors.count, "problem") %> with your registration:</dt>
+      <% @user.errors.full_messages.each do |msg| %>
+        <dd><%= msg %></dd>
+      <% end %>
+    </dl>
+<% end %>

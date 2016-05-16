@@ -1,0 +1,29 @@
+<% if flash[:msg] %>
+  <div class="container"
+    <div class="row text-center">
+      <div class="form-group col-xs-6 col-md-4 col-xs-offset-3 col-md-offset-4">
+        <%= flash[:msg] %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class="container">
+  <%= form_tag action: 'send_reset_email', controller: :users do %>
+    <div class="row text-center">
+      <h2 class="col-md-12">Reset your password</h2>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-xs-6 col-md-4 col-xs-offset-3 col-md-offset-4">
+        <label for="user_username">Username or Email:</label>
+        <%= text_field_tag 'user[username]', nil, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-6 col-md-4 col-xs-offset-3 col-md-offset-4">
+          <%= submit_tag 'Request', class: "form-control" %>
+      </div>
+    </div>
+  <% end %>
+</div>
